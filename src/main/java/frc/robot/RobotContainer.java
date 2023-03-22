@@ -8,7 +8,7 @@ import frc.robot.subsystems.FalconSubsystem;
 
 public class RobotContainer {
     private final Joystick m_driverController = new Joystick(0);
-    private final FalconSubsystem m_falconSubsystem = new FalconSubsystem(1);
+    private final FalconSubsystem m_falconSubsystem = new FalconSubsystem(0);
 
     public RobotContainer() {
         configureButtonBindings();
@@ -20,7 +20,6 @@ public class RobotContainer {
     }
 
     public Command getAutonomousCommand() {
-        // TODO: Return an autonomous command.
         return null;
     }
 }
