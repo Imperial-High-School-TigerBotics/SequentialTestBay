@@ -29,10 +29,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
       m_motor.setNeutralMode(NeutralMode.Brake);
       m_controller = new PIDController(kP, kI, kD);
       m_controller.setTolerance(kTolerance);
-      m_enabled = true; // initialize to enabled by default
+      m_enabled = false;
     }
   
     public double setSetpoint(double setpoint){
+      m_enabled = true; // initialize to enabled by default
       return this.setpoint = setpoint;
     }
 
