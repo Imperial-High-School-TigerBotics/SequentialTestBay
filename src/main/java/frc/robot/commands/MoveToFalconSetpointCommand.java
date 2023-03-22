@@ -16,7 +16,7 @@ public class MoveToFalconSetpointCommand extends CommandBase {
 
   @Override
   public void initialize() {
-    m_falconSubsystem.moveToSetpoint(m_setpoint);
+    m_falconSubsystem.setSetpoint(m_setpoint);
   }
 
   @Override
