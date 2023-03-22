@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
     private static final double kI = 0.0;
     private static final double kD = 0.0;
   
-    private static final double kTolerance = 0.1;
+    private static final double kTolerance = 0.5;
   
     private static final int kMaxEncoderValue = 150000;
     private static final int kMinEncoderValue = 0;
