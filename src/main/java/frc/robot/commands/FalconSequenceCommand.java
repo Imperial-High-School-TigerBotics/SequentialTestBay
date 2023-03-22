@@ -1,19 +1,19 @@
+package frc.robot.commands;
+
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.subsystems.FalconSubsystem;
 
-public class FalconSequenceCommand extends SequentialCommandGroup {
-  private final FalconSubsystem m_falconSubsystem;
+public class FalconSequenceCommand {
+    private final SequentialCommandGroup m_commandGroup;
 
-  public FalconSequenceCommand(FalconSubsystem falconSubsystem, double setpoint) {
-    m_falconSubsystem = falconSubsystem;
+    public FalconSequenceCommand(FalconSubsystem falconSubsystem, double setpoint) {
+        m_commandGroup = new SequentialCommandGroup(
+            new MoveToFalconSetpointCommand(falconSubsystem, setpoint).withTimeout(5),
+            new FalconStopCommand(falconSubsystem)
+        );
+    }
 
-    addCommands(
-      new MoveToFalconSetpointCommand(falconSubsystem, setpoint)
-    );
-  }
-
-  @Override
-  public void end(boolean interrupted) {
-    // Stop the Falcon motor when the command is finished or interrupted
-    m_falconSubsystem.stopMotor();
-  }
+    public SequentialCommandGroup getCommandGroup() {
+        return m_commandGroup;
+    }
 }
