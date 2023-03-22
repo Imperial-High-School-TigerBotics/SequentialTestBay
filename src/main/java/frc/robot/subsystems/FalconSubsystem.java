@@ -51,9 +51,13 @@ public class FalconSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Motor Position", currentPosition);
     if (currentPosition > kMaxEncoderValue) {
       m_motor.setSelectedSensorPosition(kMaxEncoderValue);
+      stopMotor();
     } else if (currentPosition < kMinEncoderValue) {
       m_motor.setSelectedSensorPosition(kMinEncoderValue);
+      stopMotor();
     }
+
+    moveToSetpoint(currentPosition);
   }
 
   public void stopMotor() {
