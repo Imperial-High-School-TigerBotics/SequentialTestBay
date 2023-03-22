@@ -18,7 +18,7 @@ public class RobotContainer {
     private void configureButtonBindings() {
         JoystickButton moveToFalconSetpointButton = new JoystickButton(m_driverController, 2);
         moveToFalconSetpointButton.onTrue(new FalconSequenceCommand(m_falconSubsystem, 10000).getCommandGroup());
-    }
+    }    
 
     public Command getAutonomousCommand() {
         return null;

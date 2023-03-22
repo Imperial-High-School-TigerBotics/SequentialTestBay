@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
     private static final double kI = 0.0;
     private static final double kD = 0.0;
   
-    private static final double kTolerance = 0.5;
+    private static final double kTolerance = 10;
   
     private static final int kMaxEncoderValue = 150000;
     private static final int kMinEncoderValue = 0;
@@ -39,7 +39,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
     public void moveToSetpoint() {
       double output = m_controller.calculate(m_motor.getSelectedSensorPosition(), setpoint);
-  
+      
       if (output > 1.0) {
         output = 1.0;
       } else if (output < -1.0) {
@@ -62,6 +62,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
       SmartDashboard.putNumber("Motor Position", currentPosition);
       if (m_enabled) {
         useOutput(m_controller.calculate(getMeasurement(), getSetpoint()));
+        SmartDashboard.putNumber("Output", m_controller.calculate(getMeasurement(), getSetpoint()));
+      }else if(Math.round(currentPosition) <= Math.round(setpoint)){
+        m_motor.setSelectedSensorPosition(setpoint);
+        disable();
       }else if (currentPosition > kMaxEncoderValue) {
         m_motor.setSelectedSensorPosition(kMaxEncoderValue);
         disable();
