@@ -34,6 +34,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
   
     public double setSetpoint(double setpoint){
       m_enabled = true; // initialize to enabled by default
+      m_controller.setSetpoint(setpoint);
       return this.setpoint = setpoint;
     }
 
@@ -61,15 +62,21 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
       double currentPosition = m_motor.getSelectedSensorPosition();
       SmartDashboard.putNumber("Motor Position", currentPosition);
       if (m_enabled) {
-        useOutput(m_controller.calculate(getMeasurement(), getSetpoint()));
+        //useOutput(m_controller.calculate(getMeasurement(), getSetpoint()));
         SmartDashboard.putNumber("Output", m_controller.calculate(getMeasurement(), getSetpoint()));
-      }else if(Math.round(currentPosition) <= Math.round(setpoint)){
+      }
+      
+      if((Math.round(setpoint)) == (Math.round(currentPosition)) ){
+        System.out.println("Stopped!");
         m_motor.setSelectedSensorPosition(setpoint);
+        if(currentPosition!=setpoint) moveToSetpoint();
         disable();
       }else if (currentPosition > kMaxEncoderValue) {
+        System.out.println("Overload!");
         m_motor.setSelectedSensorPosition(kMaxEncoderValue);
         disable();
       } else if (currentPosition < kMinEncoderValue) {
+        System.out.println("Underload!");
         m_motor.setSelectedSensorPosition(kMinEncoderValue);
         disable();
       }

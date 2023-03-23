@@ -10,7 +10,7 @@ public class FalconSequenceCommand {
 
     public FalconSequenceCommand(FalconSubsystem falconSubsystem, double setpoint) {
         m_commandGroup = new SequentialCommandGroup(
-            new WaitCommand(5),
+           // new WaitCommand(5),
             new MoveToFalconSetpointCommand(falconSubsystem, setpoint)
         );
     }
